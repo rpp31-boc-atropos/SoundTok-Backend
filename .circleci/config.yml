@@ -26,10 +26,7 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  test-workflow:
-    jobs:
-      - build_and_test
-  build-and-deploy:
+  build-test-and-deploy:
     jobs:
       - build_and_test
       - deploy_to_aws:
