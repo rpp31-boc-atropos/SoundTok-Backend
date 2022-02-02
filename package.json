@@ -4,14 +4,14 @@
   "description": "Blue Ocean App",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server/index.js",
     "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rpp31-boc-atropos/SoundTok-Backend.git"
   },
-  "author": "",
+  "author": "Clayton, Julie, Maggie, Poyraz, Rick, Yu, Yuanqi",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rpp31-boc-atropos/SoundTok-Backend/issues"
@@ -20,6 +20,7 @@
   "dependencies": {
     "express": "^4.17.2",
     "jest": "^27.4.7",
+    "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
   }
 }
