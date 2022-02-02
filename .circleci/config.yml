@@ -2,9 +2,22 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  node: circleci/node@5.5.0
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+  install-node:
+    steps:
+      - checkout
+      # checks out the project source code into working directory
+      - run:
+        name: "Install"
+        command: "npm install"
+      - run:
+        name: "Start App"
+        command: "npm start"
+
   say-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor

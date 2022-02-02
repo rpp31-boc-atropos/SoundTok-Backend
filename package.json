@@ -1,0 +1,23 @@
+{
+  "name": "soundtok-backend",
+  "version": "1.0.0",
+  "description": "Blue Ocean App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpp31-boc-atropos/SoundTok-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpp31-boc-atropos/SoundTok-Backend/issues"
+  },
+  "homepage": "https://github.com/rpp31-boc-atropos/SoundTok-Backend#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
