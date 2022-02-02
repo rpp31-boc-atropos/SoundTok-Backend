@@ -7,7 +7,7 @@ orbs:
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  install-node:
+  build_and_test:
     docker:
       - image: cimg/base:stable
     steps:
@@ -15,10 +15,6 @@ jobs:
       - node/install
       - node/install-packages
       - run: node --version
-  run-tests:
-    docker:
-      - image: cimg/base:stable
-    steps:
       - run: node test
 
 
@@ -27,5 +23,4 @@ jobs:
 workflows:
   test-and-deploy-workflow:
     jobs:
-      - install-node
-      - run-tests
+      - build_and_test
