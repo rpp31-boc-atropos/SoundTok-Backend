@@ -15,7 +15,7 @@ jobs:
       - node/install
       - node/install-packages
       - run: node --version
-      - run: node test
+      - run: npm test
 
 
 # Invoke jobs via workflows
