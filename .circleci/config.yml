@@ -16,11 +16,23 @@ jobs:
       - node/install-packages
       - run: node --version
       - run: npm test
+  deploy_to_aws:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "do deployment stuff"
 
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  test-workflow:
+  build-test-and-deploy:
     jobs:
       - build_and_test
+      - deploy_to_aws:
+          requires:
+            - build_and_test
+          filters:
+            branches:
+              only:
+                - main
