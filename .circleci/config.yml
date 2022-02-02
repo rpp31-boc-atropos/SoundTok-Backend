@@ -16,6 +16,11 @@ jobs:
       - node/install-packages
       - run: node --version
       - run: npm test
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - echo "do deployment stuff"
 
 
 # Invoke jobs via workflows
@@ -24,3 +29,13 @@ workflows:
   test-workflow:
     jobs:
       - build_and_test
+  build-and-deploy:
+    jobs:
+      - build_and_test
+      - deploy:
+        requires:
+          - build
+        filters:
+          branches:
+            only:
+              - main
