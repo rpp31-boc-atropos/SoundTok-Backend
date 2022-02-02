@@ -19,7 +19,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - node/tests
+      - run: node test
 
 
 # Invoke jobs via workflows
