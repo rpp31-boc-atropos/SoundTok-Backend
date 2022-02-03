@@ -18,7 +18,8 @@ jobs:
       - run: npm test
   deploy_to_aws:
     machine:
-      - enabled: true
+      image: ubuntu-2004:202111-02
+    resource_class: medium
     steps:
       - run: ssh ubuntu@$SSH_HOST
       - run: cd ~/SoundTok-Backend
