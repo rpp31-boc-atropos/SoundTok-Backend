@@ -21,9 +21,10 @@ jobs:
       image: ubuntu-2004:202111-02
     resource_class: medium
     steps:
-      - run: ssh ubuntu@$SSH_HOST
-      - run: cd ~/SoundTok-Backend
-      - run: git pull origin main
+      - add_ssh_keys:
+          fingerprints:
+            - "2a:0e:22:3f:95:74:34:be:54:67:98:6f:8d:f8:d4:85"
+      - run: ssh ubuntu@$SSH_HOST "cd ~/SoundTok-Backend; git pull origin main"
 
 
 # Invoke jobs via workflows
