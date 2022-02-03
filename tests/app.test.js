@@ -3,8 +3,8 @@ const request = require('supertest');
 
 describe('Example Jest Test', () => {
   test('1+1=2', () => {
-    expect(1+1).toBe(2);
-  })
+    expect(1 + 1).toBe(2);
+  });
 });
 
 describe('Server responds to endpoints', () => {
@@ -15,4 +15,4 @@ describe('Server responds to endpoints', () => {
         expect(res.statusCode).not.toBe(404);
       });
   });
-})
+});
