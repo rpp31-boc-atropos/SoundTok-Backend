@@ -17,10 +17,13 @@ jobs:
       - run: node --version
       - run: npm test
   deploy_to_aws:
-    docker:
-      - image: cimg/base:stable
+    machine:
+      image: ubuntu-2004:202111-02
+    resource_class: medium
     steps:
-      - run: echo "do deployment stuff"
+      - run: ssh ubuntu@$SSH_HOST
+      - run: cd ~/SoundTok-Backend
+      - run: git pull origin main
 
 
 # Invoke jobs via workflows
