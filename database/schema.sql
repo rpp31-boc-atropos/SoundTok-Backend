@@ -27,7 +27,7 @@ CREATE TABLE tracks (
   track_url VARCHAR(100),
   track_description VARCHAR(500),
   track_image VARCHAR(100)
-)
+);
 
 CREATE TABLE drafts (
   id INT NOT NULL PRIMARY KEY
