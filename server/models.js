@@ -1,9 +1,7 @@
-const pool = require('../database/index');
 
-//purpose: Scehma defintion of te Model. Queries the DB
+const getAllTracks = `SELECT * from tracks`;
 
-/*
+
 module.exports = {
-
+  getAllTracks
 };
-*/

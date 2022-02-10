@@ -1,16 +1,11 @@
-const { Pool } = require('pg');
+const Pool = require('pg').Pool;
 
 const pool = new Pool({
-  user: process.env.DB_USER || 'postgres',
-  host: process.env.DB_HOST || 'localhost',
-  database: process.env.DB_NAME || 'soundTok',
+  user: process.env.DB_USR || 'postgres',
   password: process.env.DB_PASS || '',
-  port: process.env.DB_PORT || 5432
-});
-
-pool.on('error', (err, client) => {
-  console.error('Unexpected error: ', err);
-  process.exit(-1);
+  host: process.env.DB_HOST || '',
+  port: process.env.DB_PORT || 5432,
+  database: process.env.DB_NAME || 'soundtok'
 });
 
 module.exports = pool;
