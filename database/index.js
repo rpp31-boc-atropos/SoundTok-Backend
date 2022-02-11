@@ -1,16 +1,18 @@
-const { Pool } = require('pg');
+const pool = require('../database/config.js');
+const express = require('express');
 
-const pool = new Pool({
-  user: process.env.DB_USER || 'postgres',
-  host: process.env.DB_HOST || 'localhost',
-  database: process.env.DB_NAME || 'soundTok',
-  password: process.env.DB_PASS || '',
-  port: process.env.DB_PORT || 5432
-});
 
-pool.on('error', (err, client) => {
-  console.error('Unexpected error: ', err);
-  process.exit(-1);
-});
+//tracks
+const getAllTracks = (request, response) => {
+  pool.query(`SELECT * FROM tracks`, (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
 
-module.exports = pool;
+
+module.exports = {
+  getAllTracks
+};
