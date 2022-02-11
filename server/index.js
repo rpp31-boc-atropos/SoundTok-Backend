@@ -1,21 +1,13 @@
 const express = require('express');
-const pool = require('../database/index.js');
-const model = require('./models.js');
+const pool = require('../database/config.js');
+const db = require('../database/index.js');
 
 const app = express();
 
 app.use(express.json());
 
 //ROUTES
-//sample route
-app.get('/', async(req, res) => {
-  try {
-    const allTracks = await pool.query(model.getAllTracks)
-    res.status(200).json(allTracks.rows)
-  } catch (err) {
-    console.log(err)
-  }
-});
+app.get('/tracks', db.getAllTracks);
 
 
 app.listen(3000, () => {
