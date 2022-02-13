@@ -5,10 +5,10 @@ CREATE DATABASE soundtok;
 
 CREATE TABLE user_accounts (
   id INT NOT NULL PRIMARY KEY,
+  email VARCHAR(100),
   username VARCHAR(100),
-  password VARCHAR(30),
-  profilePicture VARCHAR(300),
-  post_id INT
+  user_bio VARCHAR(500),
+  profilePicture VARCHAR(300)
 );
 
 INSERT INTO user_accounts (id, username, password, profilePicture, post_id)

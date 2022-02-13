@@ -1,6 +1,20 @@
 const pool = require('../database/config.js');
 const express = require('express');
 
+
+const createUser = (req, res) => {
+  pool.query(
+    `
+    `,
+    (err, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(201);
+    }
+  );
+};
+
 const getPosts = (req, res) => {
   pool.query(
     `
@@ -30,5 +44,6 @@ const getPosts = (req, res) => {
 
 
 module.exports = {
+  createUser,
   getPosts
 };
