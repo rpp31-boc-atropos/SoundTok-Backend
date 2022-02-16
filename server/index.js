@@ -15,8 +15,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //ROUTES
-app.post('/user', db.createUser);
 app.get('/', db.getPosts);
+app.post('/', db.postPost);
 
 
 

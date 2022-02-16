@@ -46,7 +46,23 @@ const getPosts = (req, res) => {
 
 
 
+const postPost = (req, res) => {
+  const { timePosted, username, postLikes, postSaved, postText, tags, projectAudioLink, projectTitle, projectLength } = req.body;
+  //query 1 results
+  //INSERT INTO projects (projectTitle, projectAudioLink, projectImageLink, projectLength)
+  console.log(timePosted, username, postText, tags)
+  console.log(typeof postText)
+
+  let sql1 = `INSERT INTO posts (timePosted, postText) VALUES (?, ?)`
+  pool.query(`INSERT INTO posts (timePosted, postText) VALUES (?, ?)`);
+
+
+};
+
+
+
 module.exports = {
   createUser,
-  getPosts
+  getPosts,
+  postPost
 };
