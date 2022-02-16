@@ -7,9 +7,9 @@ const app = express();
 app.use(express.json());
 
 //ROUTES
-app.get('/', db.getPosts);
+app.get('/tracks', db.getAllTracks);
 
 
-app.listen(1234, () => {
-  console.log('Server started on port 1234');
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
 });
