@@ -19,6 +19,9 @@ const getPosts = (req, res) => {
   pool.query(
     `
     SELECT
+      u.id AS user_id,
+      p.id AS post_id,
+      pj.id AS project_id,
       u.profilePicture,
       p.timePosted,
       u.username,
