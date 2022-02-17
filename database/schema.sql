@@ -23,8 +23,8 @@ DROP TABLE posts;
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
   timePosted TIMESTAMP,
-  postLikes INT,
-  postSaved BOOLEAN,
+  postLikes INT DEFAULT 0,
+  postSaved BOOLEAN DEFAULT FALSE,
   postText VARCHAR(200),
   tags VARCHAR(200),
   user_id INT
