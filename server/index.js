@@ -1,6 +1,6 @@
 const express = require('express');
 const pool = require('../database/config.js');
-const db = require('../database/index.js');
+const userPosts = require('../database/userPosts.js');
 var cors = require('cors');
 
 
@@ -15,8 +15,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //ROUTES
-app.post('/user', db.createUser);
-app.get('/', db.getPosts);
+app.get('/', userPosts.getPosts);
+app.post('/', userPosts.postPost);
+app.put('/', userPosts.updateLikes);
+app.put('/', userPosts.updateSave);
 
 
 
