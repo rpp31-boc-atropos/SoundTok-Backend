@@ -34,9 +34,9 @@ const getPosts = async (req, res) => {
 
 const postPost = async (req, res) => {
   const { timePosted, username, postLikes, postSaved, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
-  const query1 = "INSERT INTO posts (timePosted, postText, tags, user_id) VALUES ($1, $2, $3, (SELECT id FROM user_accounts WHERE username = $4)) RETURNING *"
+  const query1 = "INSERT INTO posts (timePosted, postText, tags, user_id) VALUES ($1, $2, $3, (SELECT id FROM user_accounts WHERE username = $4) ) RETURNING *"
   const query2 = "INSERT INTO projects (projecttitle, projectlength, projectImage, post_id) VALUES ($1, $2, $3, (SELECT max(id) FROM posts) ) RETURNING *"
-  pool
+  await pool
     .query(query1, [timePosted, postText, tags, username])
     .then(results => {
       console.log('insert into projects table complete');
