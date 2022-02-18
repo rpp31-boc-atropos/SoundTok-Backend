@@ -26,7 +26,7 @@ CREATE TABLE posts (
   postLikes INT DEFAULT 0,
   postSaved BOOLEAN DEFAULT FALSE,
   postText VARCHAR(200),
-  tags VARCHAR(200),
+  tags JSONB,
   user_id INT
 );
 
