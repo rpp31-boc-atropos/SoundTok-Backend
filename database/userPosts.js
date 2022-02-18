@@ -52,6 +52,10 @@ const postPost = async (req, res) => {
     })
 };
 
+const deletePost = async (req, res) => {
+
+}
+
 //stretch
 const updateLikes = async (req, res) => {
 
@@ -60,6 +64,8 @@ const updateLikes = async (req, res) => {
 const updateSave = async (req, res) => {
 
 }
+
+
 
 
 
