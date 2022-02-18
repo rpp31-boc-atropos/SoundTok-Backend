@@ -2,9 +2,11 @@ const Pool = require('pg').Pool;
 const dotenv = require('dotenv');
 const result = dotenv.config();
 
+/*
 if (result.error) {
   throw result.error;
 }
+*/ 
 
 const pool = new Pool({
   user: process.env.DB_USR || 'postgres',
