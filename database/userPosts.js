@@ -28,7 +28,6 @@ const getPosts = async (req, res) => {
       res.status(200).json(results.rows)
     })
     .catch(err => console.log('error executing query', err.stack))
-  pool.end().then(() => console.log('pool has ended'))
 };
 
 
