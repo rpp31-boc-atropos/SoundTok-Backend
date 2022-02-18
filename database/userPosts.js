@@ -28,7 +28,6 @@ const getPosts = async (req, res) => {
       res.status(200).json(results.rows)
     })
     .catch(err => console.log('error executing query', err.stack))
-  pool.end().then(() => console.log('pool has ended'))
 };
 
 
@@ -53,6 +52,10 @@ const postPost = async (req, res) => {
     })
 };
 
+const deletePost = async (req, res) => {
+
+}
+
 //stretch
 const updateLikes = async (req, res) => {
 
@@ -61,6 +64,8 @@ const updateLikes = async (req, res) => {
 const updateSave = async (req, res) => {
 
 }
+
+
 
 
 
