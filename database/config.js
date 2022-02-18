@@ -1,6 +1,10 @@
 const Pool = require('pg').Pool;
 const result = require('dotenv').config();
 
+if (result.error) {
+  throw result.error;
+}
+
 const pool = new Pool({
   user: process.env.DB_USR || 'postgres',
   password: process.env.DB_PASS || '',
