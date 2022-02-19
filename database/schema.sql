@@ -33,22 +33,26 @@ CREATE TABLE posts (
 INSERT INTO posts (timePosted, postLikes, postSaved, postText, tags, user_id)
 VALUES ('2022-02-10 10:23:54+02', 123, false, 'rabbit thinks he is the only one who likes #haymama. well check this track out', '["haymama"]', 1),
 ('2022-01-19 10:23:54+02', 123, false, 'hi frieeeeends im a rabbit and this my first track boom. #haymama #first', '["haymama", "first"]', 2),
-('2021-10-19 10:23:54+02', 123, false, 'I have been waiting to release this for so long. pls no hate thx. #meow', '["meow"]', 3);
+('2021-10-19 10:23:54+02', 123, false, 'I have been waiting to release this for so long. pls no hate thx. #meow', '["meow"]', 3),
+('2022-02-12 10:23:54+02', 123, false, 'Stella made another post! #anothaone', '["anothaone"]', 1);
 
 DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
   id SERIAL PRIMARY KEY,
   projectAudioLink VARCHAR(200),
   projectTitle VARCHAR(100),
+  projectImage VARCHAR(200),
   projectLength INT,
-  projectImage VARCHAR(100),
-  post_id INT
+  post_id INT,
+  user_id INT
  );
 
 INSERT INTO projects (projectAudioLink, projectTitle, projectLength, projectImage, post_id)
-VALUES ('some audio link', 'group meow', 239, 'no image', 1),
-('https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_01_-_Augmentations.mp3', 'first song man', 283, 'image', 2),
-('https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_08_-_Downfall.mp3', 'group meow 1', 98, 'image', 3);
+VALUES
+('some audio link', 'group meow', 239, 'no image', 1),
+('https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_01_-_Augmentations.mp3', 'first song man', 283, 'image',2),
+('https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_08_-_Downfall.mp3', 'group meow 1', 98, 'image', 3),
+('https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_08_-_Downfall.mp3', 'group meow 1', 98, 'image', 4);
 
 
 /* data not finalized below
@@ -58,7 +62,7 @@ Once it's POST - flattens into url track and has to go into projects table
 DROP TABLE IF EXISTS tracks;
 CREATE TABLE tracks (
   id SERIAL PRIMARY KEY,
-  project_id INT,
+  trackImage VARCHAR(200),
   track_title VARCHAR(100),
   track_url VARCHAR(100),
   track_description VARCHAR(500),

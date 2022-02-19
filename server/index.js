@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../database/config.js');
 const userPosts = require('../database/userPosts.js');
+const userProfile = require('../database/userProfile.js');
 var cors = require('cors');
 
 
@@ -19,6 +20,8 @@ app.get('/', userPosts.getPosts);
 app.post('/', userPosts.postPost);
 app.put('/', userPosts.updateLikes);
 app.put('/', userPosts.updateSave);
+
+app.get('/userPosts', userProfile.getUserProjects);
 
 
 
