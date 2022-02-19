@@ -43,8 +43,8 @@ CREATE TABLE projects (
   projectTitle VARCHAR(100),
   projectImage VARCHAR(200),
   projectLength INT,
-  post_id INT,
-  user_id INT
+  post_id INT
+ -- user_id INT --not using this
  );
 
 INSERT INTO projects (projectAudioLink, projectTitle, projectLength, projectImage, post_id)
