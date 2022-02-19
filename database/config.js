@@ -6,14 +6,15 @@ const result = dotenv.config();
 if (result.error) {
   throw result.error;
 }
-*/ 
+*/
+
 
 const pool = new Pool({
-  user: process.env.DB_USR || 'postgres',
-  password: process.env.DB_PASS || '',
-  host: process.env.DB_HOST || '',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'soundtok'
+  user: 'jlxtyoekaxwghw',
+  password: 'dchtq9jhrcvlbv',
+  host: 'ec2-3-227-55-25.compute-1.amazonaws.com',
+  port: 5432,
+  database: 'dchtq9jhrcvlbv'
 });
 
 module.exports = pool;
