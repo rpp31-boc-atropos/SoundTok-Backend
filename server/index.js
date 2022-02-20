@@ -23,7 +23,7 @@ app.post('/', userPosts.postPost);
 app.put('/', userPosts.updateLikes);
 app.put('/', userPosts.updateSave);
 
-app.get('/userPosts', userProfile.getUserProjects);
+app.get('/userProjects', userProfile.getUserProjects);
 
 
 

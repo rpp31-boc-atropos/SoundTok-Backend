@@ -3,6 +3,7 @@ const express = require('express');
 
 
 const getUserProjects = async (req, res) => {
+  console.log('request ', req)
   await pool
     .query(
       `
@@ -12,22 +13,21 @@ const getUserProjects = async (req, res) => {
         u.username AS username,
         jsonb_agg(jsonb_build_object(
           'postId', p.id,
-          'projectId', pj.id,
           'timePosted', p.timePosted,
           'postLikes', p.postLikes,
           'postSaved', p.postSaved,
           'postText', p.postText,
-          'tags', p.tags,
-          'projectAudioLink', pj.projectAudioLink,
-          'projectTitle', pj.projectTitle,
-          'projectLength', pj.projectLength
+          'tags', h.hashtagArr,
+          'projectAudioLink', p.projectAudioLink,
+          'projectTitle', p.projectTitle,
+          'projectLength', p.projectLength
         )) as projectData
       FROM user_accounts u
       LEFT JOIN posts p ON u.id = p.user_id
-      LEFT JOIN projects pj ON pj.post_id = p.id
+      LEFT JOIN hashtags h ON p.id = h.post_id
       WHERE u.username = $1
       GROUP BY u.id
-      `, ['stella']
+      `, [req.params]
     )
     .then(results => {
       res.status(200).json(results.rows)
