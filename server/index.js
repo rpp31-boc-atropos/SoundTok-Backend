@@ -17,8 +17,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 //ROUTES
-app.get('/', (req, res) => res.send('Hello World'));
-//app.get('/', userPosts.getPosts);
+//app.get('/', (req, res) => res.send('Hello World'));
+app.get('/', userPosts.getPosts);
 app.post('/', userPosts.postPost);
 app.put('/', userPosts.updateLikes);
 app.put('/', userPosts.updateSave);
