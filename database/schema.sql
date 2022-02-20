@@ -1,7 +1,7 @@
 --npm run pgtest if you want to populate table first time
 --npm run pg if you just want to run postgres
 
-DROP DATABASE IF EXISTS soundtok;
+DROP DATABASE soundtok;
 CREATE DATABASE soundtok;
 
 --Edit tables as needed
@@ -11,7 +11,9 @@ CREATE TABLE user_accounts (
   email VARCHAR(100),
   username VARCHAR(100),
   user_bio VARCHAR(500),
-  profilePicture VARCHAR(300)
+  profilePicture VARCHAR(300),
+  post_id INT, --may not need
+  user_id INT --may not need
 );
 
 INSERT INTO user_accounts (username, profilePicture)
@@ -25,34 +27,38 @@ CREATE TABLE posts (
   timePosted TIMESTAMP,
   postLikes INT DEFAULT 0,
   postSaved BOOLEAN DEFAULT FALSE,
-  postText VARCHAR(200),
-  tags JSONB,
+  postText VARCHAR(500),
+  projectAudioLink VARCHAR(200),
+  projectTitle VARCHAR(200),
+  projectLength INT,
+  projectImageLink VARCHAR(200),
   user_id INT
 );
 
-INSERT INTO posts (timePosted, postLikes, postSaved, postText, tags, user_id)
-VALUES ('2022-02-10 10:23:54+02', 123, false, 'rabbit thinks he is the only one who likes #haymama. well check this track out', '["haymama"]', 1),
-('2022-01-19 10:23:54+02', 123, false, 'hi frieeeeends im a rabbit and this my first track boom. #haymama #first', '["haymama", "first"]', 2),
-('2021-10-19 10:23:54+02', 123, false, 'I have been waiting to release this for so long. pls no hate thx. #meow', '["meow"]', 3),
-('2022-02-12 10:23:54+02', 123, false, 'Stella made another post! #anothaone', '["anothaone"]', 1);
+INSERT INTO posts (timePosted, postLikes, postSaved, postText, projectAudioLink, projectTitle, projectLength, projectImageLink, user_id)
+VALUES('2022-02-11T18:34:49.915-08:00', 123, false, 'Chicago, im SO excited, to hold you guys over until then, heres a #teaser :)','https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_03_-_Contention.mp3','hay fever', 239, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Yawning_horse%2C_Scotland.jpg/640px-Yawning_horse%2C_Scotland.jpg',  1),
+('2022-02-04T18:34:49.915-08:00', 123, false, 'hi frieeeeends im a rabbit and this my first track boom. #haymama #first','https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_01_-_Augmentations.mp3', 'first song man', 283, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Yawning_horse%2C_Scotland.jpg/640px-Yawning_horse%2C_Scotland.jpg',  2),
+('2022-01-11T18:34:49.915-08:00', 123, false, 'I have been waiting to release this for so long. pls no hate thx. #meow','https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Yawning_horse%2C_Scotland.jpg/640px-Yawning_horse%2C_Scotland.jpg', 'group moew 1', 98, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Yawning_horse%2C_Scotland.jpg/640px-Yawning_horse%2C_Scotland.jpg',  3),
+('2022-01-11T18:34:49.915-08:00', 123, false, 'Chicago, im SO excited, to hold you guys over until then, heres a #teaser :)', 'https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_03_-_Contention.mp3', 'hay mama THIS panda', 239, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Yawning_horse%2C_Scotland.jpg/640px-Yawning_horse%2C_Scotland.jpg',  1),
+('2021-12-04T18:34:49.915-08:00', 123, false, 'hi frieeeeends im a rabbit and this my first track boom. #haymama #first', 'https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_01_-_Augmentations.mp3', 'second song man', 283, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Yawning_horse%2C_Scotland.jpg/640px-Yawning_horse%2C_Scotland.jpg',  2),
+('2021-11-11T18:34:49.915-08:00', 123, false, 'I have been waiting to release this for so long. pls no hate thx. #meow', 'https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_08_-_Downfall.mp3', 'group meow 2', 98, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Yawning_horse%2C_Scotland.jpg/640px-Yawning_horse%2C_Scotland.jpg',  3);
 
-DROP TABLE IF EXISTS projects;
-CREATE TABLE projects (
+
+
+DROP TABLE IF EXISTS hashtags;
+CREATE TABLE hashtags (
   id SERIAL PRIMARY KEY,
-  projectAudioLink VARCHAR(200),
-  projectTitle VARCHAR(100),
-  projectImage VARCHAR(200),
-  projectLength INT,
-  post_id INT,
-  user_id INT
- );
+  hashtagArr JSONB,
+  tag VARCHAR(200), --in case the array doesn't work out
+  index INT,  --in case the array doesn't work out
+  post_id INT, --may not need
+  user_id INT --may not need
+);
 
-INSERT INTO projects (projectAudioLink, projectTitle, projectLength, projectImage, post_id)
-VALUES
-('some audio link', 'group meow', 239, 'no image', 1),
-('https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_01_-_Augmentations.mp3', 'first song man', 283, 'image',2),
-('https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_08_-_Downfall.mp3', 'group meow 1', 98, 'image', 3),
-('https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Kai_Engel/Satin/Kai_Engel_-_08_-_Downfall.mp3', 'group meow 1', 98, 'image', 4);
+INSERT INTO hashtags (hashtagArr, tag, index, post_id)
+VALUES('[{"teaser": 70}]', 'teaser', 70, 1),
+('[{"teaser": 70}]', 'teaser', 70, 3),
+('[{"teaser": 70}]', 'teaser', 70, 4);
 
 
 /* data not finalized below
