@@ -7,21 +7,19 @@ const getPosts = async (req, res) => {
       `
       SELECT
         u.id AS "userId",
-        p.id AS "postId",
-        pj.id AS "projectId",
+        u.username AS "username",
         u.profilePicture AS "profilePicture",
         p.timePosted AS "timePosted",
-        u.username AS username,
-        p.postLikes AS "postLikes",
         p.postSaved AS "postSaved",
         p.postText AS "postText",
-        p.tags AS tags,
-        pj.projectAudioLink AS "projectAudioLink",
-        pj.projectTitle AS "projectTitle",
-        pj.projectLength AS "projectLength"
+        h.hashtagArr AS "tags",
+        p.projectAudioLink AS "projectAudioLink",
+        p.projectTitle AS "projectTitle",
+        p.projectLength AS "projectLength",
+        p.projectImageLink AS "projectImageLink"
       FROM user_accounts u
       LEFT JOIN posts p ON u.id = p.user_id
-      LEFT JOIN projects pj ON pj.post_id = p.id
+      LEFT JOIN hashtags h ON p.id = h.post_id
       `
     )
     .then(results => {
