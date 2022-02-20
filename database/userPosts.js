@@ -7,21 +7,19 @@ const getPosts = async (req, res) => {
       `
       SELECT
         u.id AS "userId",
-        p.id AS "postId",
-        pj.id AS "projectId",
+        u.username AS "username",
         u.profilePicture AS "profilePicture",
         p.timePosted AS "timePosted",
-        u.username AS username,
-        p.postLikes AS "postLikes",
         p.postSaved AS "postSaved",
         p.postText AS "postText",
-        p.tags AS tags,
-        pj.projectAudioLink AS "projectAudioLink",
-        pj.projectTitle AS "projectTitle",
-        pj.projectLength AS "projectLength"
+        h.hashtagArr AS "tags",
+        p.projectAudioLink AS "projectAudioLink",
+        p.projectTitle AS "projectTitle",
+        p.projectLength AS "projectLength",
+        p.projectImageLink AS "projectImageLink"
       FROM user_accounts u
       LEFT JOIN posts p ON u.id = p.user_id
-      LEFT JOIN projects pj ON pj.post_id = p.id
+      LEFT JOIN hashtags h ON p.id = h.post_id
       `
     )
     .then(results => {
@@ -33,18 +31,18 @@ const getPosts = async (req, res) => {
 
 const postPost = async (req, res) => {
   const { userId, timePosted, username, postLikes, postSaved, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
-  const query1 = "INSERT INTO posts (timePosted, postText, tags, user_id) VALUES ($1, $2, $3, (SELECT id FROM user_accounts WHERE username = $4) ) RETURNING *"
-  const query2 = "INSERT INTO projects (projecttitle, projectlength, projectImage, post_id, user_id) VALUES ($1, $2, $3, (SELECT max(id) FROM posts), $4 ) RETURNING *"
+  const query1 = "INSERT INTO posts (timePosted, postLikes, postSaved, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, (SELECT id FROM user_accounts WHERE username = $9) ) RETURNING *"
+  const query2 = "INSERT INTO hashtags (hashtagArr, post_id) VALUES ($1, (SELECT max(id) FROM posts) ) RETURNING *"
   await pool
-    .query(query1, [timePosted, postText, tags, username])
+    .query(query1, [timePosted, postLikes, postSaved, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, username])
     .then(results => {
-      console.log('insert into projects table complete');
+      console.log('insert into posts table complete');
     })
     .then(() => {
-      pool.query(query2, [projectTitle, projectLength, projectImageLink, userId])
+      pool.query(query2, [tags])
     })
     .then(results => {
-      console.log('insert into posts table complete')
+      console.log('insert into hashtags table complete')
       res.status(201).json('inserts complete!')
     })
     .catch(err => {

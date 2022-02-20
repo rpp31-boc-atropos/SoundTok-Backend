@@ -32,6 +32,7 @@ CREATE TABLE posts (
   projectTitle VARCHAR(200),
   projectLength INT,
   projectImageLink VARCHAR(200),
+  tracks JSONB, --will try it this way first and add separate table if it works better
   user_id INT
 );
 
