@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../database/config.js');
+const userAccounts = require('../database/userAccounts.js');
 const userPosts = require('../database/userPosts.js');
 const userProfile = require('../database/userProfile.js');
 const port = 1234;
@@ -22,7 +23,7 @@ app.get('/', userPosts.getPosts);
 app.post('/', userPosts.postPost);
 app.put('/', userPosts.updateLikes);
 app.put('/', userPosts.updateSave);
-
+app.post('/createUser', userAccounts.createUser);
 app.get('/userProjects', userProfile.getUserProjects);
 
 
