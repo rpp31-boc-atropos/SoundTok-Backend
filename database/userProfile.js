@@ -1,9 +1,8 @@
 const pool = require('../database/config.js');
 const express = require('express');
 
-
 const getUserProjects = async (req, res) => {
-  console.log('request ', req)
+  const { username } = req.params;
   await pool
     .query(
       `
@@ -27,7 +26,7 @@ const getUserProjects = async (req, res) => {
       LEFT JOIN hashtags h ON p.id = h.post_id
       WHERE u.username = $1
       GROUP BY u.id
-      `, [req.body.params]
+      `, [username]
     )
     .then(results => {
       res.status(200).json(results.rows)
@@ -35,6 +34,16 @@ const getUserProjects = async (req, res) => {
     .catch(err => console.log('error executing query', err.stack))
 };
 
+//WIP
+const updateProfile = async (req, res) => {
+  const { username, bio } = req.params
+  await pool
+    .query(
+
+    )
+}
+
 module.exports = {
-  getUserProjects
+  getUserProjects,
+  updateProfile
 };
