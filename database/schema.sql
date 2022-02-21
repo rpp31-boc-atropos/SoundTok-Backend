@@ -8,7 +8,7 @@ CREATE DATABASE soundtok;
 DROP TABLE IF EXISTS user_accounts;
 CREATE TABLE user_accounts (
   id SERIAL PRIMARY KEY,
-  email VARCHAR(100),
+  email VARCHAR(100) DEFAULT 'no',
   username VARCHAR(100),
   user_bio VARCHAR(500),
   profilePicture VARCHAR(300),
