@@ -8,7 +8,7 @@ CREATE DATABASE soundtok;
 DROP TABLE IF EXISTS user_accounts;
 CREATE TABLE user_accounts (
   id SERIAL PRIMARY KEY,
-  email VARCHAR(100) DEFAULT 'no',
+  email VARCHAR(100),
   username VARCHAR(100),
   user_bio VARCHAR(500),
   profilePicture VARCHAR(300),
@@ -60,7 +60,6 @@ INSERT INTO hashtags (hashtagArr, tag, index, post_id)
 VALUES('[{"teaser": 70}]', 'teaser', 70, 1),
 ('[{"teaser": 70}]', 'teaser', 70, 3),
 ('[{"teaser": 70}]', 'teaser', 70, 4);
-
 
 /* data not finalized below
 Once it's POST - flattens into url track and has to go into projects table

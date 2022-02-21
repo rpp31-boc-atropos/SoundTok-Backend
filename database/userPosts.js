@@ -1,6 +1,7 @@
 const pool = require('../database/config.js');
 const express = require('express');
 
+//front page
 const getPosts = async (req, res) => {
   await pool
     .query(
@@ -54,13 +55,44 @@ const deletePost = async (req, res) => {
 
 }
 
-//stretch
 const updateLikes = async (req, res) => {
 
 }
 
 const updateSave = async (req, res) => {
 
+}
+
+//hashtags
+const getHashtagPosts = async (req, res) => {
+  const { tag } = req.params;
+  console.log(tag)
+  await pool
+    .query(
+      `
+      SELECT
+        u.id AS "userId",
+        u.username AS "username",
+        u.profilePicture AS "profilePicture",
+        p.timePosted AS "timePosted",
+        p.postSaved AS "postSaved",
+        p.postText AS "postText",
+        h.hashtagArr AS "tags",
+        p.projectAudioLink AS "projectAudioLink",
+        p.projectTitle AS "projectTitle",
+        p.projectLength AS "projectLength",
+        p.projectImageLink AS "projectImageLink"
+      FROM user_accounts u
+      LEFT JOIN posts p ON u.id = p.user_id
+      LEFT JOIN hashtags h ON p.id = h.post_id
+      CROSS JOIN LATERAL JSONB_ARRAY_ELEMENTS((hashtagArr))
+      CROSS JOIN LATERAL JSONB_OBJECT_KEYS(value) where jsonb_object_keys = $1
+      `, [tag]
+    )
+    .then(results => {
+      res.status(200).json(results.rows)
+    })
+    .catch(err => console.log('error executing query', err.stack))
 }
 
 
@@ -71,5 +103,6 @@ module.exports = {
   getPosts,
   postPost,
   updateLikes,
-  updateSave
+  updateSave,
+  getHashtagPosts
 };

@@ -23,6 +23,7 @@ app.get('/', userPosts.getPosts);
 app.post('/', userPosts.postPost);
 app.put('/', userPosts.updateLikes);
 app.put('/', userPosts.updateSave);
+app.get('/getHashtags/:tag', userPosts.getHashtagPosts);
 app.post('/createUser', userAccounts.createUser);
 app.get('/userProjects', userProfile.getUserProjects);
 
