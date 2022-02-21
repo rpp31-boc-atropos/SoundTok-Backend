@@ -61,7 +61,6 @@ VALUES('[{"teaser": 70}]', 'teaser', 70, 1),
 ('[{"teaser": 70}]', 'teaser', 70, 3),
 ('[{"teaser": 70}]', 'teaser', 70, 4);
 
-
 /* data not finalized below
 Once it's POST - flattens into url track and has to go into projects table
 */

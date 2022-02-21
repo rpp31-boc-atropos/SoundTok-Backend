@@ -27,7 +27,7 @@ const getUserProjects = async (req, res) => {
       LEFT JOIN hashtags h ON p.id = h.post_id
       WHERE u.username = $1
       GROUP BY u.id
-      `, [req.params]
+      `, [req.body.params]
     )
     .then(results => {
       res.status(200).json(results.rows)
