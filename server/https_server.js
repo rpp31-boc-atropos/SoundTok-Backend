@@ -7,7 +7,7 @@ var httpsOptions = {
   cert: cert
 };
 
-const app = require('./server.js');
+const app = require('./index.js');
 
 var server = https.createServer(httpsOptions, app);
 
