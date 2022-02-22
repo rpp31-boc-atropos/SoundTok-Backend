@@ -4,7 +4,8 @@
   "description": "Blue Ocean App",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server/index.js",
+    "start": "nodemon server/http_server.js",
+    "https": "nodemon server/https_server.js",
     "test": "jest",
     "pgtest": "psql postgres -h 127.0.0.1 -d soundtok -f database/schema.sql",
     "pg": "psql postgres -h 127.0.0.1 -d soundtok"
