@@ -3,7 +3,6 @@ const pool = require('../database/config.js');
 const userAccounts = require('../database/userAccounts.js');
 const userPosts = require('../database/userPosts.js');
 const userProfile = require('../database/userProfile.js');
-const port = 1234;
 var cors = require('cors');
 
 
@@ -37,6 +36,4 @@ app.put('/updateProfile', userProfile.updateProfile);
 //STUDIOS
 //tbd
 
-app.listen(process.env.PORT || port, () => {
-  console.log('Server started on port 1234');
-});
+module.exports = app;
