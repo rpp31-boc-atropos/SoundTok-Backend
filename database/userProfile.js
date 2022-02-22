@@ -2,7 +2,7 @@ const pool = require('../database/config.js');
 const express = require('express');
 
 const getUserProjects = async (req, res) => {
-  const { username } = req.params;
+  const { username } = req.body.params;
   await pool
     .query(
       `

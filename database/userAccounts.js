@@ -25,7 +25,27 @@ const createUser = async (req, res) => {
   }
 }
 
+const getUpdatedData = async (req, res) => {
+  const { email } = req.params;
+  await pool
+    .query(
+      `SELECT
+        u.email AS "email",
+        u.username AS "username",
+        u.user_bio AS "userBio",
+        u.profilepicture AS "profilePicture"
+      FROM user_accounts u
+      WHERE email = $1
+      `, [email]
+    )
+    .then(results => {
+      res.status(200).json(results.rows)
+    })
+    .catch(err => console.log('error executing query', err.stack))
+}
+
 
 module.exports = {
-  createUser
+  createUser,
+  getUpdatedData
 };
