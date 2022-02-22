@@ -26,7 +26,9 @@ const createUser = async (req, res) => {
 }
 
 const getUpdatedData = async (req, res) => {
-  const { email } = req.params;
+  const { email } = req.query;
+  console.log(email)
+
   await pool
     .query(
       `SELECT
