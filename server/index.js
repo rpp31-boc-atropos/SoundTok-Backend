@@ -19,8 +19,9 @@ app.use(cors(corsOptions));
 
 //ROUTES
 
-//AUTH
+//AUTH / FRONT-END REACT USE CONTEXT
 app.post('/createUser', userAccounts.createUser);
+app.get('/getUserData', userAccounts.getUpdatedData);
 
 //FEED
 app.get('/', userPosts.getPosts);
@@ -33,7 +34,8 @@ app.get('/getHashtags/:tag', userPosts.getHashtagPosts);
 app.get('/getProfileData/projects/:username', userProfile.getUserProjects);
 app.put('/updateProfile', userProfile.updateProfile);
 
-
+//STUDIOS
+//tbd
 
 app.listen(process.env.PORT || port, () => {
   console.log('Server started on port 1234');
