@@ -3,6 +3,7 @@ const express = require('express');
 
 // get all drafts for provided username
 const getUserDrafts = async (req, res) => {
+  const { username } = req.params;
   await pool
     .query(
       `
@@ -12,12 +13,12 @@ const getUserDrafts = async (req, res) => {
         p.projectAudioLink AS "projectAudioLink",
         p.projectTitle AS "projectTitle",
         p.projectLength AS "projectLength",
-        p.tracks AS "tracks",
+        p.tracks AS "tracks"
       FROM posts p
       JOIN user_accounts u ON p.user_id = u.id
+      WHERE p.published = FALSE AND u.username = $1
       ORDER BY p.id DESC
-      WHERE p.published = FALSE
-      `
+      `, [username]
     )
     .then(results => {
       res.status(200).json(results.rows)
