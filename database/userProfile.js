@@ -2,7 +2,8 @@ const pool = require('../database/config.js');
 const express = require('express');
 
 const getUserProjects = async (req, res) => {
-  const { username } = req.body.params;
+  const { username } = req.params;
+
   await pool
     .query(
       `
@@ -33,17 +34,32 @@ const getUserProjects = async (req, res) => {
     })
     .catch(err => console.log('error executing query', err.stack))
 };
-
-//WIP
+//update profile pic
 const updateProfile = async (req, res) => {
-  const { username, bio } = req.params
-  await pool
-    .query(
+  const { username, profileUrl, bio } = req.params;
+  pool
+    .query(`UPDATE user_accounts SET profilePicture = $1`, [profileUrl])
+    .then(result => res.status(201))
+    .catch(err => {
+      console.log(err)
+    })
+}
 
+//remove post from profile
+const removePost = async (req, res) => {
+  const { source, postId } = req.params;
+  pool
+    .query(`DELETE FROM posts WHERE id = $1`, [postId])
+    .then(result => res.status(204))
+    .catch(err => {
+      console.log('error executing delete', err.stack)
+      res.status(404).json(`something went wrong: ${err}`)
+      }
     )
 }
 
 module.exports = {
   getUserProjects,
-  updateProfile
+  updateProfile,
+  removePost
 };

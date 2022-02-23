@@ -32,6 +32,8 @@ app.get('/getHashtags/:tag', userPosts.getHashtagPosts);
 //PROFILE
 app.get('/getProfileData/projects/:username', userProfile.getUserProjects);
 app.put('/updateProfile', userProfile.updateProfile);
+app.delete('/removePost', userProfile.removePost);
+
 
 //STUDIOS
 //tbd
