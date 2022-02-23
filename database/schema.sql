@@ -25,7 +25,9 @@ CREATE TABLE posts (
   projectTitle VARCHAR(200),
   projectLength INT,
   projectImageLink VARCHAR(200),
-  user_id INT
+  user_id INT,
+  published BOOLEAN DEFAULT FALSE,
+  tracks JSONB
 );
 
 DROP TABLE IF EXISTS hashtags;
@@ -41,10 +43,3 @@ Once it's POST - flattens into url track and has to go into projects table
 */
 
 DROP TABLE IF EXISTS drafts;
-CREATE TABLE drafts (
-  id SERIAL PRIMARY KEY,
-  user_id INT,
-  name VARCHAR(200),
-  date TIMESTAMP,
-  tracks JSONB
-);
