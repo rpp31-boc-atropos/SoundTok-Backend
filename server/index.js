@@ -3,6 +3,7 @@ const pool = require('../database/config.js');
 const userAccounts = require('../database/userAccounts.js');
 const userPosts = require('../database/userPosts.js');
 const userProfile = require('../database/userProfile.js');
+const userDrafts = require('../database/userDrafts.js');
 var cors = require('cors');
 
 
@@ -36,6 +37,7 @@ app.delete('/removePost', userProfile.removePost);
 
 
 //STUDIOS
-//tbd
+app.get('/drafts/:username', userDrafts.getUserDrafts);
+app.post('/drafts', userDrafts.postDraft);
 
 module.exports = app;
