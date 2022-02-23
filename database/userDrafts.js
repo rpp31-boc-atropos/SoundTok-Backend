@@ -3,22 +3,21 @@ const express = require('express');
 
 // get all drafts for provided username
 const getUserDrafts = async (req, res) => {
-  const { username } = req.params;
-
   await pool
     .query(
       `
-      SElECT
-        d.id AS draft_id,
-        u.id AS user_id,
-        d.name AS name,
-        d.date AS date,
-        d.tracks AS tracks
-      FROM user_accounts u
-      JOIN drafts d ON u.id = d.user_id
-      WHERE u.username = $1
-      ORDER BY d.date DESC
-      `, [username]
+      SELECT
+        u.id AS "userId",
+        u.username AS "username",
+        p.projectAudioLink AS "projectAudioLink",
+        p.projectTitle AS "projectTitle",
+        p.projectLength AS "projectLength",
+        p.tracks AS "tracks",
+      FROM posts p
+      JOIN user_accounts u ON p.user_id = u.id
+      ORDER BY p.id DESC
+      WHERE p.published = FALSE
+      `
     )
     .then(results => {
       res.status(200).json(results.rows)
@@ -27,13 +26,13 @@ const getUserDrafts = async (req, res) => {
 };
 
 const postDraft = async (req, res) => {
-  const { username, name, date, tracks } = req.body;
-  const query1 = "INSERT INTO drafts (user_id, name, date, tracks) VALUES ((SELECT id FROM user_accounts WHERE username = $1), $2, $3, $4) RETURNING *";
+  const { username, projectTitle, projectLength, projectAudioLink, tracks } = req.body;
+  const query1 = "INSERT INTO posts (user_id, projectTitle, projectLength, projectAudioLink, tracks) VALUES ((SELECT id FROM user_accounts WHERE username = $1), $2, $3, $4, $5) RETURNING *";
   await pool
-    .query(query1, [username, name, date, tracks])
+    .query(query1, [username, projectTitle, projectLength, projectAudioLink, tracks])
     .then(results => {
-      console.log(`inserted ${name} into drafts table complete`);
-      res.status(201).json(`inserted ${name} into drafts table`)
+      console.log(`inserted ${projectTitle} into drafts table complete`);
+      res.status(201).json(`inserted ${projectTitle} into drafts table`)
     })
     .catch(err => {
       console.log(err.stack)
