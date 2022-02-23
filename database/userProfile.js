@@ -11,6 +11,7 @@ const getUserProjects = async (req, res) => {
         u.id AS "userId",
         u.profilePicture AS "profilePicture",
         u.username AS username,
+        u.user_bio AS "userBio",
         jsonb_agg(jsonb_build_object(
           'postId', p.id,
           'timePosted', p.timePosted,
