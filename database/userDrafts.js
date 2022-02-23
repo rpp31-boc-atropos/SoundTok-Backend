@@ -9,13 +9,15 @@ const getUserDrafts = async (req, res) => {
     .query(
       `
       SElECT
+        d.id AS draft_id,
+        u.id AS user_id,
         d.name AS name,
         d.date AS date,
         d.tracks AS tracks
       FROM user_accounts u
       JOIN drafts d ON u.id = d.user_id
       WHERE u.username = $1
-      GROUP BY u.id
+      ORDER BY d.date DESC
       `, [username]
     )
     .then(results => {

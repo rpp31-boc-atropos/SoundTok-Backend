@@ -11,7 +11,7 @@ CREATE TABLE user_accounts (
   email VARCHAR(100),
   username VARCHAR(100),
   user_bio VARCHAR(500),
-  profilePicture VARCHAR(300),
+  profilePicture VARCHAR(300)
 );
 
 DROP TABLE IF EXISTS posts;
