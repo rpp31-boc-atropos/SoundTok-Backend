@@ -25,8 +25,6 @@ CREATE TABLE posts (
   projectTitle VARCHAR(200),
   projectLength INT,
   projectImageLink VARCHAR(200),
-  tracks JSONB,
-  isDraft BOOLEAN,
   user_id INT
 );
 
@@ -44,5 +42,9 @@ Once it's POST - flattens into url track and has to go into projects table
 
 DROP TABLE IF EXISTS drafts;
 CREATE TABLE drafts (
-  id SERIAL PRIMARY KEY
+  id SERIAL PRIMARY KEY,
+  user_id INT,
+  name VARCHAR(200),
+  date TIMESTAMP,
+  tracks JSONB
 );
