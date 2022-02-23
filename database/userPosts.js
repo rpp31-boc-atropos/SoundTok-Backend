@@ -18,9 +18,9 @@ const getPosts = async (req, res) => {
         p.projectTitle AS "projectTitle",
         p.projectLength AS "projectLength",
         p.projectImageLink AS "projectImageLink"
-      FROM user_accounts u
-      JOIN posts p ON u.id = p.user_id
-      LEFT JOIN hashtags h ON p.id = h.post_id
+      FROM posts p
+      JOIN user_accounts u ON p.user_id = u.id
+      JOIN hashtags h ON p.id = h.post_id
       `
     )
     .then(results => {
@@ -31,20 +31,20 @@ const getPosts = async (req, res) => {
 
 
 const postPost = async (req, res) => {
-  const { userId, timePosted, username, postLikes, postSaved, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
-  const query1 = "INSERT INTO posts (timePosted, postLikes, postSaved, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, (SELECT id FROM user_accounts WHERE username = $9) ) RETURNING *"
+  const { tracks, userId, timePosted, username, postLikes, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
+  const query1 = "INSERT INTO posts (isDraft, timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, user_id) VALUES (False, $1, $2, $3, $4, $5, $6, $7, (SELECT id FROM user_accounts WHERE username = $8) ) RETURNING *"
   const query2 = "INSERT INTO hashtags (hashtagArr, post_id) VALUES ($1, (SELECT max(id) FROM posts) ) RETURNING *"
   await pool
-    .query(query1, [timePosted, postLikes, postSaved, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, username])
+    .query(query1, [timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, username])
     .then(results => {
-      console.log('insert into posts table complete');
+      console.log(`inserted ${projectTitle} into posts table complete`);
     })
     .then(() => {
       pool.query(query2, [tags])
     })
     .then(results => {
-      console.log('insert into hashtags table complete')
-      res.status(201).json('inserts complete!')
+      console.log(`inserted ${hashtagArr} into the hashtags table`)
+      res.status(201).json(`inserted ${hashtagArr} / ${projectTitle} into the hashtags and projects tables`)
     })
     .catch(err => {
       console.log(err.stack)
