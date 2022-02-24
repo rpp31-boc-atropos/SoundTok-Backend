@@ -107,6 +107,5 @@ module.exports = {
   postPost,
   updateLikes,
   updateSave,
-  getHashtagPosts,
-  getHashtagSearch
+  getHashtagPosts
 };
