@@ -19,8 +19,8 @@ const getPosts = async (req, res) => {
         p.projectLength AS "projectLength",
         p.projectImageLink AS "projectImageLink"
       FROM posts p
-      JOIN user_accounts u ON p.user_id = u.id
-      JOIN hashtags h ON p.id = h.post_id
+      LEFT JOIN user_accounts u ON p.user_id = u.id
+      LEFT JOIN hashtags h ON p.id = h.post_id
       ORDER BY p.id DESC
       `
     )
