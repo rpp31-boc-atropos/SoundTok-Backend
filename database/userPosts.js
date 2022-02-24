@@ -44,8 +44,8 @@ const postPost = async (req, res) => {
       pool.query(query2, [tags])
     })
     .then(results => {
-      console.log(`inserted ${hashtagArr} into the hashtags table`)
-      res.status(201).json(`inserted ${hashtagArr} / ${projectTitle} into the hashtags and projects tables`)
+      console.log(`inserted ${tags} into the hashtags table`)
+      res.status(201).json(`inserted ${tags} / ${projectTitle} into the hashtags and projects tables`)
     })
     .catch(err => {
       console.log(err.stack)
@@ -95,6 +95,8 @@ const getHashtagPosts = async (req, res) => {
     })
     .catch(err => console.log('error executing query', err.stack))
 }
+
+//get all hashtags
 
 
 

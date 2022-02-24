@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS posts;
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
   timePosted TIMESTAMP,
+  isDraft BOOLEAN,
   postLikes INT DEFAULT 0,
   postSaved BOOLEAN DEFAULT FALSE,
   postText VARCHAR(500),
@@ -33,7 +34,7 @@ CREATE TABLE posts (
 DROP TABLE IF EXISTS hashtags;
 CREATE TABLE hashtags (
   id SERIAL PRIMARY KEY,
-  hashtagArr jsonb,
+  hashtagArr jsonb DEFAULT '[{}]',
   post_id INT
 );
 --Correct format for inserting array of objects: '[{"ep":38},{"ex": 32}]')
