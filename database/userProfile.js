@@ -37,10 +37,14 @@ const getUserProjects = async (req, res) => {
 };
 //update profile pic
 const updateProfile = async (req, res) => {
-  const { username, profileUrl, bio } = req.params;
+
+  const { username, profilePicture, bio } = req.body;
   pool
     .query(`UPDATE user_accounts SET profilePicture = $1`, [profileUrl])
-    .then(result => res.status(201))
+    .then(result => {
+      console.log(`${username}: profile picture updated`)
+      res.status(201)
+    })
     .catch(err => {
       console.log(err)
     })
