@@ -68,7 +68,6 @@ const updateSave = async (req, res) => {
 //hashtags
 const getHashtagPosts = async (req, res) => {
   const { tag } = req.params;
-  console.log('tag!', tag)
   await pool
     .query(
       `
