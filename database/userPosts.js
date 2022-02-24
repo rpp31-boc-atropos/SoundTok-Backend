@@ -1,7 +1,7 @@
 const pool = require('../database/config.js');
 const express = require('express');
 
-//front page
+//front page -
 const getPosts = async (req, res) => {
   await pool
     .query(
@@ -21,6 +21,7 @@ const getPosts = async (req, res) => {
       FROM posts p
       LEFT JOIN user_accounts u ON p.user_id = u.id
       LEFT JOIN hashtags h ON p.id = h.post_id
+      WHERE p.published = TRUE
       ORDER BY p.id DESC
       `
     )
