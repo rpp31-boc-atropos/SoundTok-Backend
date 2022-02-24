@@ -32,16 +32,17 @@ const getPosts = async (req, res) => {
 
 
 const postPost = async (req, res) => {
-  const { tracks, userId, timePosted, username, postLikes, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
-  const query1 = "INSERT INTO posts (isDraft, timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, user_id) VALUES (False, $1, $2, $3, $4, $5, $6, $7, (SELECT id FROM user_accounts WHERE username = $8) ) RETURNING *"
+  //console.log(req.body)
+  let { tracks, userId, timePosted, username, postLikes, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
+  const query1 = "INSERT INTO posts (isDraft, timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, user_id, tracks) VALUES (False, $1, $2, $3, $4, $5, $6, $7, (SELECT id FROM user_accounts WHERE username = $8), $9 ) RETURNING *"
   const query2 = "INSERT INTO hashtags (hashtagArr, post_id) VALUES ($1, (SELECT max(id) FROM posts) ) RETURNING *"
   await pool
-    .query(query1, [timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, username])
+    .query(query1, [timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, username, JSON.stringify(tracks)])
     .then(results => {
       console.log(`inserted ${projectTitle} into posts table complete`);
     })
     .then(() => {
-      pool.query(query2, [tags])
+      pool.query(query2, [JSON.stringify(tags)])
     })
     .then(results => {
       console.log(`inserted ${tags} into the hashtags table`)
@@ -67,7 +68,7 @@ const updateSave = async (req, res) => {
 //hashtags
 const getHashtagPosts = async (req, res) => {
   const { tag } = req.params;
-  console.log(tag)
+  console.log('tag!', tag)
   await pool
     .query(
       `

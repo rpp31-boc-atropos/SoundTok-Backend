@@ -34,7 +34,7 @@ CREATE TABLE posts (
 DROP TABLE IF EXISTS hashtags;
 CREATE TABLE hashtags (
   id SERIAL PRIMARY KEY,
-  hashtagArr jsonb DEFAULT '[{}]',
+  hashtagArr JSONB,
   post_id INT
 );
 --Correct format for inserting array of objects: '[{"ep":38},{"ex": 32}]')
