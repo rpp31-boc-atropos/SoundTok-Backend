@@ -7,7 +7,7 @@ const getUserProjects = async (req, res) => {
   await pool
     .query(
       `
-      SElECT
+      SELECT
         u.id AS "userId",
         u.profilePicture AS "profilePicture",
         u.username AS username,
