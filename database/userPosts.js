@@ -65,7 +65,7 @@ const updateSave = async (req, res) => {
 
 }
 
-//hashtags
+//filter by one hashtag
 const getHashtagPosts = async (req, res) => {
   const { tag } = req.params;
   await pool
@@ -96,8 +96,19 @@ const getHashtagPosts = async (req, res) => {
     .catch(err => console.log('error executing query', err.stack))
 }
 
-//get all hashtags
-
+//get hashtag by search term
+const getHashtagSearch = async (req, res) => {
+  const { searchTerm } = req.query
+  await
+    .pool(
+      `
+      SELECT str.txt
+      FROM (SELECT CAST(JSONB_OBJECT_KEYS(JSONB_ARRAY_ELEMENTS(hashtagarr)) as varchar) as txt from hashtags) str
+      WHERE str.txt like '%$1%'`, [searchTerm]
+    )
+    .then(results => res.status(200).json(results.rows))
+    .catch(err => console.log('error executing query', err.stack))
+}
 
 
 
@@ -107,5 +118,6 @@ module.exports = {
   postPost,
   updateLikes,
   updateSave,
-  getHashtagPosts
+  getHashtagPosts,
+  getHashtagSearch
 };

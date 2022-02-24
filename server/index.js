@@ -29,6 +29,7 @@ app.post('/', userPosts.postPost);
 app.put('/', userPosts.updateLikes);
 app.put('/', userPosts.updateSave);
 app.get('/getHashtags/:tag', userPosts.getHashtagPosts);
+app.get('/getHashtagSearch', userPosts.getHashtagSearch);
 
 //PROFILE
 app.get('/getProfileData/projects/:username', userProfile.getUserProjects);
