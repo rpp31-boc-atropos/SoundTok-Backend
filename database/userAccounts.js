@@ -3,7 +3,7 @@ const express = require('express');
 
 const createUser = async (req, res) => {
   let { email, username, name, nickname, picture } = req.body.params;
-  if (username.length < 1) {
+  if (!username) {
     username = nickname
   }
   console.log('username: ', username)
