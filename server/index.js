@@ -38,7 +38,7 @@ app.put('/updateProfile', userProfile.updateProfile);
 app.get('/getUserSearch', userProfile.getUserSearch);
 
 //STUDIOS
-app.get('/drafts/:username', userDrafts.getUserDrafts);
+app.get('/drafts/:email', userDrafts.getUserDrafts);
 app.post('/drafts', userDrafts.postDraft);
 
 module.exports = app;
