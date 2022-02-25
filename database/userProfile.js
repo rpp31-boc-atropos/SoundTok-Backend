@@ -53,14 +53,15 @@ const updateProfile = async (req, res) => {
 //remove post from profile
 const removePost = async (req, res) => {
   const { postId } = req.body;
-  pool
+  await pool
     .query(`DELETE FROM posts WHERE id = $1`, [postId])
-    .then(result => res.status(204))
+    .then(result => {
+      res.status(204)
+    })
     .catch(err => {
       console.log('error executing delete', err.stack)
       res.status(404).json(`something went wrong: ${err}`)
-      }
-    )
+    })
 }
 
 module.exports = {
