@@ -22,10 +22,10 @@ CREATE TABLE posts (
   postLikes INT DEFAULT 0,
   postSaved BOOLEAN DEFAULT FALSE,
   postText VARCHAR(500),
-  projectAudioLink VARCHAR(200),
+  projectAudioLink VARCHAR(10000),
   projectTitle VARCHAR(200),
   projectLength INT,
-  projectImageLink VARCHAR(200),
+  projectImageLink VARCHAR(10000),
   user_id INT,
   published BOOLEAN DEFAULT FALSE,
   tracks JSONB
