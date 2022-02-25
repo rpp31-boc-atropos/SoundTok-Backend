@@ -11,7 +11,7 @@ const getUserDrafts = async (req, res) => {
         u.id AS "userId",
         p.id AS "postId",
         u.username AS "username",
-        u.email AS "email",
+        u.email AS "userEmail",
         p.timePosted AS "timePosted",
         p.postLikes AS "postLikes",
         p.postText AS "postText",
