@@ -110,10 +110,11 @@ const getHashtagPosts = async (req, res) => {
 //get hashtag list by search term
 const getHashtagSearch = async (req, res) => {
   let { search } = req.query
+  console.log(search)
   search = '%' + search + '%'
   await pool
   .query(
-      `SELECT str.txt
+      `SELECT DISTINCT str.txt
       FROM (SELECT CAST(JSONB_OBJECT_KEYS(JSONB_ARRAY_ELEMENTS(hashtagarr)) as varchar) as txt
       FROM hashtags) str WHERE str.txt like $1`, [search]
     )
