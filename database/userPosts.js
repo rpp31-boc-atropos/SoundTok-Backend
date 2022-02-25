@@ -10,7 +10,7 @@ const getPosts = async (req, res) => {
         u.id AS "userId",
         p.id AS "postId",
         u.username AS "username",
-        u.email AS "email",
+        u.email AS "userEmail",
         u.profilePicture AS "profilePicture",
         p.timePosted AS "timePosted",
         p.postSaved AS "postSaved",
