@@ -28,14 +28,13 @@ app.get('/', userPosts.getPosts);
 app.post('/', userPosts.postPost);
 app.put('/', userPosts.updateLikes);
 app.put('/', userPosts.updateSave);
+app.delete('/deletePost', userPosts.removePost);
 app.get('/getHashtags/:tag', userPosts.getHashtagPosts);
-//app.get('/getHashtags', userPosts.getHashtagSearch);
+app.get('/getHashtags/', userPosts.getHashtagSearch);
 
 //PROFILE
 app.get('/getProfileData/projects/:username', userProfile.getUserProjects);
 app.put('/updateProfile', userProfile.updateProfile);
-app.delete('/deletePost', userProfile.removePost);
-
 
 //STUDIOS
 app.get('/drafts/:username', userDrafts.getUserDrafts);

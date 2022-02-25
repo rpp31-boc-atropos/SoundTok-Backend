@@ -54,8 +54,18 @@ const postPost = async (req, res) => {
     })
 };
 
-const deletePost = async (req, res) => {
-
+//remove post from profile
+const removePost = async (req, res) => {
+  const { postId } = req.body;
+  await pool
+    .query(`DELETE FROM posts WHERE id = $1`, [postId])
+    .then(result => {
+      res.status(204)
+    })
+    .catch(err => {
+      console.log('error executing delete', err.stack)
+      res.status(404).json(`something went wrong: ${err}`)
+    })
 }
 
 const updateLikes = async (req, res) => {
@@ -98,21 +108,19 @@ const getHashtagPosts = async (req, res) => {
 }
 
 //get hashtag list by search term
-/*
 const getHashtagSearch = async (req, res) => {
-  console.log(req)
-  const { searchTerm } = req.query
+  let { search } = req.query
+  search = '%' + search + '%'
   await pool
   .query(
-      `
-      SELECT str.txt
-      FROM (SELECT CAST(JSONB_OBJECT_KEYS(JSONB_ARRAY_ELEMENTS(hashtagarr)) as varchar) as txt from hashtags) str
-      WHERE str.txt like $1`, [searchTerm]
+      `SELECT str.txt
+      FROM (SELECT CAST(JSONB_OBJECT_KEYS(JSONB_ARRAY_ELEMENTS(hashtagarr)) as varchar) as txt
+      FROM hashtags) str WHERE str.txt like $1`, [search]
     )
     .then(results => res.status(200).json(results.rows))
     .catch(err => console.log('error executing query', err.stack))
 }
-*/
+
 
 
 
@@ -121,6 +129,8 @@ module.exports = {
   postPost,
   updateLikes,
   updateSave,
-  getHashtagPosts
-  //getHashtagSearch
+  getHashtagPosts,
+  getHashtagSearch,
+  removePost
 };
+

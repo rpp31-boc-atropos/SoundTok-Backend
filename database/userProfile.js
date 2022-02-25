@@ -27,6 +27,7 @@ const getUserProjects = async (req, res) => {
       JOIN posts p ON u.id = p.user_id
       LEFT JOIN hashtags h ON p.id = h.post_id
       WHERE u.username = $1
+      AND p.published = TRUE
       GROUP BY u.id
       `, [username]
     )
@@ -37,7 +38,6 @@ const getUserProjects = async (req, res) => {
 };
 //update profile pic
 const updateProfile = async (req, res) => {
-
   const { username, profilePicture, bio } = req.body;
   pool
     .query(`UPDATE user_accounts SET profilePicture = $1, user_bio=$2 WHERE username = $3`, [profilePicture, bio, username])
@@ -50,22 +50,10 @@ const updateProfile = async (req, res) => {
     })
 }
 
-//remove post from profile
-const removePost = async (req, res) => {
-  const { postId } = req.body;
-  await pool
-    .query(`DELETE FROM posts WHERE id = $1`, [postId])
-    .then(result => {
-      res.status(204)
-    })
-    .catch(err => {
-      console.log('error executing delete', err.stack)
-      res.status(404).json(`something went wrong: ${err}`)
-    })
-}
+
 
 module.exports = {
   getUserProjects,
-  updateProfile,
-  removePost
+  updateProfile
 };
+
