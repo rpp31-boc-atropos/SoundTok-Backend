@@ -35,6 +35,7 @@ app.get('/getHashtags', userPosts.getHashtagSearch);
 //PROFILE
 app.get('/getProfileData/projects/:username', userProfile.getUserProjects);
 app.put('/updateProfile', userProfile.updateProfile);
+app.get('/getUserSearch', userProfile.getUserSearch);
 
 //STUDIOS
 app.get('/drafts/:username', userDrafts.getUserDrafts);

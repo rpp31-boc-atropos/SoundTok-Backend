@@ -50,10 +50,24 @@ const updateProfile = async (req, res) => {
     })
 }
 
+//get user list by search term
+const getUserSearch = async (req, res) => {
+  let { search } = req.query
+  search = '%' + search + '%'
+  await pool
+  .query(
+      `SELECT DISTINCT u.username
+      FROM user_accounts u WHERE u.username like $1`, [search]
+    )
+    .then(results => res.status(200).json(results.rows))
+    .catch(err => console.log('error executing query', err.stack))
+}
+
 
 
 module.exports = {
   getUserProjects,
-  updateProfile
+  updateProfile,
+  getUserSearch
 };
 
