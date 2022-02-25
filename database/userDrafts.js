@@ -34,10 +34,10 @@ const getUserDrafts = async (req, res) => {
 };
 
 const postDraft = async (req, res) => {
-  const { username, projectTitle, projectLength, projectAudioLink, tracks, timePosted } = req.body;
-  const query1 = "INSERT INTO posts (user_id, projectTitle, projectLength, projectAudioLink, tracks, published, timePosted) VALUES ((SELECT id FROM user_accounts WHERE username = $1), $2, $3, $4, $5, FALSE, $6) RETURNING *";
+  const { email, projectTitle, projectLength, projectAudioLink, tracks, timePosted } = req.body;
+  const query1 = "INSERT INTO posts (user_id, projectTitle, projectLength, projectAudioLink, tracks, published, timePosted) VALUES ((SELECT id FROM user_accounts WHERE email = $1), $2, $3, $4, $5, FALSE, $6) RETURNING *";
   await pool
-    .query(query1, [username, projectTitle, projectLength, projectAudioLink, tracks, timePosted])
+    .query(query1, [email, projectTitle, projectLength, projectAudioLink, tracks, timePosted])
     .then(results => {
       console.log(`inserted ${projectTitle} into drafts table complete`);
       res.status(201).json(`inserted ${projectTitle} into drafts table`)
