@@ -8,6 +8,7 @@ const getUserDrafts = async (req, res) => {
     .query(
       `
       SELECT
+        p.id AS "post_id",
         u.id AS "user_id",
         u.username AS "username",
         u.email AS "email",
