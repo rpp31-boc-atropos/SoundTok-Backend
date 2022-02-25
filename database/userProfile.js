@@ -24,7 +24,7 @@ const getUserProjects = async (req, res) => {
           'projectLength', p.projectLength
         )) as projectData
       FROM user_accounts u
-      JOIN posts p ON u.id = p.user_id
+      LEFT JOIN posts p ON u.id = p.user_id
       LEFT JOIN hashtags h ON p.id = h.post_id
       WHERE u.username = $1
       AND p.published = TRUE
