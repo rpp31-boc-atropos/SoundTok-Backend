@@ -110,7 +110,6 @@ const getHashtagPosts = async (req, res) => {
 //get hashtag list by search term
 const getHashtagSearch = async (req, res) => {
   let { search } = req.query
-  console.log(search)
   search = '%' + search + '%'
   await pool
   .query(

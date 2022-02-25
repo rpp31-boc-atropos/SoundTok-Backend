@@ -3,9 +3,10 @@ const express = require('express');
 
 const createUser = async (req, res) => {
   let { email, username, name, nickname, picture } = req.body.params;
-  if (username === undefined) {
+  if (username.length < 1) {
     username = nickname
   }
+  console.log('username: ', username)
   const query1 = "SELECT email FROM user_accounts WHERE email = $1"
   const params1 = [email];
   const query2 = "INSERT INTO user_accounts (email, username, profilePicture) VALUES ($1, $2, $3) RETURNING *"
