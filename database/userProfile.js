@@ -42,7 +42,7 @@ const updateProfile = async (req, res) => {
   pool
     .query(`UPDATE user_accounts SET profilePicture = $1, user_bio=$2 WHERE username = $3`, [profilePicture, bio, username])
     .then(result => {
-      console.log(`${username}: profile picture updated`)
+      console.log(`${username}: user profile updated`)
       res.status(201)
     })
     .catch(err => {
@@ -52,7 +52,7 @@ const updateProfile = async (req, res) => {
 
 //remove post from profile
 const removePost = async (req, res) => {
-  const { source, postId } = req.params;
+  const { postId } = req.body;
   pool
     .query(`DELETE FROM posts WHERE id = $1`, [postId])
     .then(result => res.status(204))

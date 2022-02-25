@@ -2,7 +2,8 @@ const pool = require('../database/config.js');
 const express = require('express');
 
 const createUser = async (req, res) => {
-  const { email, username, name, nickname, picture } = req.body.params;
+  console.log('inside create user') 
+ const { email, username, name, nickname, picture } = req.body.params;
   const query1 = "SELECT email FROM user_accounts WHERE email = $1"
   const params1 = [email];
   const query2 = "INSERT INTO user_accounts (email, username, profilePicture) VALUES ($1, $2, $3) RETURNING *"
