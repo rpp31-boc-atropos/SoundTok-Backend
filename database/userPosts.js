@@ -8,7 +8,9 @@ const getPosts = async (req, res) => {
       `
       SELECT
         u.id AS "userId",
+        p.id AS "postId",
         u.username AS "username",
+        u.email AS "email",
         u.profilePicture AS "profilePicture",
         p.timePosted AS "timePosted",
         p.postSaved AS "postSaved",
