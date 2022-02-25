@@ -60,7 +60,7 @@ const removePost = async (req, res) => {
   await pool
     .query(`DELETE FROM posts WHERE id = $1`, [postId])
     .then(result => {
-      res.status(204)
+      res.status(204).json(`deleted post`)
     })
     .catch(err => {
       console.log('error executing delete', err.stack)
