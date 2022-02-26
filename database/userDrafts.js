@@ -4,6 +4,7 @@ const express = require('express');
 // get all drafts for provided username
 const getUserDrafts = async (req, res) => {
   const { email } = req.params;
+  console.log(email);
   await pool
     .query(
       `
@@ -40,15 +41,32 @@ const postDraft = async (req, res) => {
     .query(query1, [email, projectTitle, projectLength, projectAudioLink, tracks, timePosted])
     .then(results => {
       console.log(`inserted ${projectTitle} into drafts table complete`);
-      res.status(201).json(`inserted ${projectTitle} into drafts table`)
+      res.status(201).json(`inserted ${projectTitle} into drafts table`);
     })
     .catch(err => {
       console.log(err.stack)
     })
 };
 
+const getDraftById = async (req, res) => {
+  const { postId } = req.params;
+  await pool
+    .query(
+      `
+      SELECT *
+      FROM posts p
+      WHERE p.id = $1
+      `, [postId]
+    )
+    .then(results => {
+      res.status(200).json(results.rows)
+    })
+    .catch(err => console.log('error executing query', err.stack))
+};
+
 
 module.exports = {
   getUserDrafts,
-  postDraft
+  postDraft,
+  getDraftById
 };

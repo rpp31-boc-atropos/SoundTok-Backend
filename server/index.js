@@ -40,5 +40,6 @@ app.get('/getUserSearch', userProfile.getUserSearch);
 //STUDIOS
 app.get('/drafts/:email', userDrafts.getUserDrafts);
 app.post('/drafts', userDrafts.postDraft);
+app.get('/drafts/id/:postId', userDrafts.getDraftById);
 
 module.exports = app;
