@@ -60,6 +60,8 @@ const postPost = async (req, res) => {
 
 //remove post from profile
 const removePost = async (req, res) => {
+  console.log('inside delete')
+  console.log(req)
   const { postId } = req.body;
   await pool
     .query(`DELETE FROM posts WHERE id = $1`, [postId])
