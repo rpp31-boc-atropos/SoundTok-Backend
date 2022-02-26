@@ -55,6 +55,7 @@ const getDraftById = async (req, res) => {
       `
       SELECT *
       FROM posts p
+      JOIN user_accounts u ON p.user_id = u.id
       WHERE p.id = $1
       `, [postId]
     )
