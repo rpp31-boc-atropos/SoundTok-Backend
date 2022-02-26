@@ -24,7 +24,7 @@ const getPosts = async (req, res) => {
       LEFT JOIN user_accounts u ON p.user_id = u.id
       LEFT JOIN hashtags h ON p.id = h.post_id
       WHERE p.published = TRUE
-      ORDER BY p.id DESC
+      ORDER BY p.timePosted DESC
       `
     )
     .then(results => {
@@ -35,9 +35,6 @@ const getPosts = async (req, res) => {
 
 
 const postPost = async (req, res) => {
-  //console.log(req.body)
-  console.log(req.body)
-  console.log('in post post')
   let { published, tracks, userId, timePosted, username, postLikes, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
   const query1 = "INSERT INTO posts (published, timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, user_id, tracks) VALUES (true, $1, $2, $3, $4, $5, $6, $7, (SELECT id FROM user_accounts WHERE username = $8), $9 ) RETURNING *"
   const query2 = "INSERT INTO hashtags (hashtagArr, post_id) VALUES ($1, (SELECT max(id) FROM posts) ) RETURNING *"
@@ -60,6 +57,8 @@ const postPost = async (req, res) => {
 
 //remove post from profile
 const removePost = async (req, res) => {
+  console.log('inside delete')
+  console.log(req)
   const { postId } = req.body;
   await pool
     .query(`DELETE FROM posts WHERE id = $1`, [postId])
@@ -70,14 +69,6 @@ const removePost = async (req, res) => {
       console.log('error executing delete', err.stack)
       res.status(404).json(`something went wrong: ${err}`)
     })
-}
-
-const updateLikes = async (req, res) => {
-
-}
-
-const updateSave = async (req, res) => {
-
 }
 
 //filter by one hashtag
@@ -131,8 +122,6 @@ const getHashtagSearch = async (req, res) => {
 module.exports = {
   getPosts,
   postPost,
-  updateLikes,
-  updateSave,
   getHashtagPosts,
   getHashtagSearch,
   removePost

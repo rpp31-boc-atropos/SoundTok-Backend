@@ -26,11 +26,10 @@ app.get('/getUserData', userAccounts.getUpdatedData);
 //FEED
 app.get('/', userPosts.getPosts);
 app.post('/', userPosts.postPost);
-app.put('/', userPosts.updateLikes);
-app.put('/', userPosts.updateSave);
 app.delete('/deletePost', userPosts.removePost);
 app.get('/getHashtags/:tag', userPosts.getHashtagPosts);
 app.get('/getHashtags', userPosts.getHashtagSearch);
+app.post('/deletePost', userPosts.removePost);
 
 //PROFILE
 app.get('/getProfileData/projects/:username', userProfile.getUserProjects);

@@ -21,13 +21,13 @@ const getUserProjects = async (req, res) => {
           'tags', h.hashtagArr,
           'projectAudioLink', p.projectAudioLink,
           'projectTitle', p.projectTitle,
-          'projectLength', p.projectLength
+          'projectLength', p.projectLength,
+          'draft', p.published
         )) as projectData
       FROM user_accounts u
-      JOIN posts p ON u.id = p.user_id
+      LEFT JOIN posts p ON u.id = p.user_id
       LEFT JOIN hashtags h ON p.id = h.post_id
       WHERE u.username = $1
-      AND p.published = TRUE
       GROUP BY u.id
       `, [username]
     )
@@ -38,6 +38,7 @@ const getUserProjects = async (req, res) => {
 };
 //update profile pic
 const updateProfile = async (req, res) => {
+  console.log(req)
   const { username, profilePicture, bio } = req.body;
   pool
     .query(`UPDATE user_accounts SET profilePicture = $1, user_bio=$2 WHERE username = $3`, [profilePicture, bio, username])
