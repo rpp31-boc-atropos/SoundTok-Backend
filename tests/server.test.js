@@ -48,18 +48,3 @@ describe('User Feed Endpoints', () => {
   })
 
 });
-
-/*
-describe('Hashtag Endpoints', () => {
-
-  test('GET /getHashtags/:tag should filter feed based on one hashtag', async () => {
-
-  })
-
-  test('GET /getHashtags should return a list of distinct hashtags based on keyword search', async () => {
-
-  } )
-
-
-})
-*/
