@@ -11,7 +11,7 @@ describe('Example Jest Test', () => {
 describe('User Feed Endpoints', () => {
 
   test('GET / should retrieve all posts', async () => {
-    const res = await requestWithSupertest.get('/')
+    const res = await Promise.resolve(requestWithSupertest.get('/'))
     expect(res.status).toEqual(200);
     expect(res.type).toEqual(expect.stringContaining('json'));
     expect(res.body).toEqual(expect.arrayContaining([
@@ -21,6 +21,8 @@ describe('User Feed Endpoints', () => {
         "projectImageLink": expect.any(String)
       })
     ]))
+
+
   })
 
   test('POST / should add a new post to the feed', async () => {
@@ -48,6 +50,8 @@ describe('User Feed Endpoints', () => {
   })
 
 });
+
+
 
 /*
 describe('Hashtag Endpoints', () => {
