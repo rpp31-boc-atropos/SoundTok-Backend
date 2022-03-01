@@ -8,12 +8,16 @@ describe('Example Jest Test', () => {
   });
 });
 
-describe('User Feed Endpoints', () => {
 
   test('GET / should retrieve all posts', async () => {
-    const res = await Promise.resolve(requestWithSupertest.get('/'))
+
+    const res = await requestWithSupertest.get('/')
     expect(res.status).toEqual(200);
-    expect(res.type).toEqual(expect.stringContaining('json'));
+
+
+
+  /*
+  expect(res.type).toEqual(expect.stringContaining('json'));
     expect(res.body).toEqual(expect.arrayContaining([
       expect.objectContaining({
         "postId": expect.any(Number),
@@ -22,8 +26,6 @@ describe('User Feed Endpoints', () => {
       })
     ]))
 
-
-  })
 
   test('POST / should add a new post to the feed', async () => {
     const res = await requestWithSupertest.post('/').send({
@@ -48,7 +50,7 @@ describe('User Feed Endpoints', () => {
     })
     expect(res.statusCode).toBe(204)
   })
-
+  */
 });
 
 

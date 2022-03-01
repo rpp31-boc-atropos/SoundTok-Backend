@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/http_server.js",
     "https": "nodemon server/https_server.js",
-    "test": "jest",
+    "test": "jest --runInBand --detectOpenHandles",
     "pgtest": "psql postgres -h 127.0.0.1 -d soundtok -f database/schema.sql",
     "pg": "psql postgres -h 127.0.0.1 -d soundtok"
   },
