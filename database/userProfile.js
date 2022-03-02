@@ -22,6 +22,7 @@ const getUserProjects = async (req, res) => {
           'projectAudioLink', p.projectAudioLink,
           'projectTitle', p.projectTitle,
           'projectLength', p.projectLength,
+          'projectImageLink', p.projectimagelink,
           'draft', p.published
         )) as projectData
       FROM user_accounts u
