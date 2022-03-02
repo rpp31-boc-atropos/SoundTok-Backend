@@ -36,10 +36,10 @@ const getPosts = async (req, res) => {
 
 const postPost = async (req, res) => {
   let { published, tracks, userId, timePosted, username, postLikes, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
-  const query1 = "INSERT INTO posts (published, timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, user_id, tracks) VALUES (true, $1, $2, $3, $4, $5, $6, $7, (SELECT id FROM user_accounts WHERE username = $8), $9 ) RETURNING *"
+  const query1 = "INSERT INTO posts (published, timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, user_id, tracks) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, (SELECT id FROM user_accounts WHERE username = $9), $10 ) RETURNING *"
   const query2 = "INSERT INTO hashtags (hashtagArr, post_id) VALUES ($1, (SELECT max(id) FROM posts) ) RETURNING *"
   await pool
-    .query(query1, [timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, username, JSON.stringify(tracks)])
+    .query(query1, [published, timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, username, JSON.stringify(tracks)])
     .then(results => {
       console.log(`inserted ${projectTitle} into posts table complete`);
     })
