@@ -1,7 +1,7 @@
-const app = require('../server/index.js');
+//const app = require('../server/index.js');
 const request = require('supertest');
-const requestWithSupertest = request(app);
-
+//const requestWithSupertest = request(app);
+/*
 describe('Example Jest Test', () => {
   test('1+1=2', () => {
     expect(1 + 1).toBe(2);
@@ -48,3 +48,4 @@ describe('User Feed Endpoints', () => {
   })
 
 });
+*/
