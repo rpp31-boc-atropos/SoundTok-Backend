@@ -37,10 +37,5 @@ CREATE TABLE hashtags (
   hashtagArr JSONB,
   post_id INT
 );
---Correct format for inserting array of objects: '[{"ep":38},{"ex": 32}]')
-
-/* data not finalized below
-Once it's POST - flattens into url track and has to go into projects table
-*/
 
 DROP TABLE IF EXISTS drafts;
