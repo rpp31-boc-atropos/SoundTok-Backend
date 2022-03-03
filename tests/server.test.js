@@ -1,12 +1,53 @@
-//const app = require('../server/index.js');
+const app = require('../server/index.js');
 const request = require('supertest');
-//const requestWithSupertest = request(app);
+const db = require("../database/config.js");
 
 describe('Example Jest Test', () => {
   test('1+1=2', () => {
     expect(1 + 1).toBe(2);
   });
 });
+/*
+beforeAll(async () => {
+  //await db.query("CREATE TABLE posts (id SERIAL PRIMARY KEY, timePosted TIMESTAMP,postLikes INT DEFAULT 0, postSaved BOOLEAN DEFAULT FALSE, postText VARCHAR(500), projectAudioLink VARCHAR(10000), projectTitle VARCHAR(200), projectLength INT, projectImageLink VARCHAR(10000), user_id INT, published BOOLEAN DEFAULT FALSE, tracks JSONB)");
+});
+
+beforeEach(async () => {
+  // seed with some data
+  await db.query("INSERT INTO posts (postText) VALUES ('test1'), ('test2')");
+});
+
+afterEach(async () => {
+  //await db.query("DELETE FROM students");
+});
+beforeEach(async () => {
+  // seed with some data
+  await db.query("INSERT INTO posts (postText) VALUES ('test1'), ('test2')");
+});
+
+*/
+
+
+
+afterAll(async () => {
+  db.end();
+});
+
+describe("GET / ", () => {
+  test('GET / should retrieve all posts', async () => {
+    const res = await request(app).get('/')
+    expect(res.status).toEqual(200);
+    expect(res.type).toEqual(expect.stringContaining('json'));
+    expect(res.body).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        "postId": expect.any(Number),
+        "projectAudioLink": expect.any(String),
+        "projectImageLink": expect.any(String)
+      })
+    ]))
+  })
+});
+
 
 
 
