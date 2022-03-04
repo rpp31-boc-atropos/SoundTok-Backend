@@ -42,7 +42,7 @@ const updateProfile = async (req, res) => {
   console.log(req)
   const { username, profilePicture, bio } = req.body;
   pool
-    .query(`UPDATE user_accounts SET profilePicture = $1, user_bio=$2 WHERE username = $3`, [profilePicture, bio, username])
+    .query(`UPDATE user_accounts SET profilePicture = $1, user_bio = $2 WHERE username = $3`, [profilePicture, bio, username])
     .then(result => {
       console.log(`${username}: user profile updated`)
       res.status(201)

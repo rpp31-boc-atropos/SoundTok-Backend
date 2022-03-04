@@ -1,6 +1,7 @@
 const pool = require('../database/config.js');
 const express = require('express');
 
+
 // get all drafts for provided username
 const getUserDrafts = async (req, res) => {
   const { email } = req.params;
