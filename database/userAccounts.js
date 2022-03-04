@@ -1,8 +1,10 @@
 const pool = require('../database/config.js');
 const express = require('express');
+const transformUrl = require('./transformUrl.js');
 
 const createUser = async (req, res) => {
   let { email, username, name, nickname, picture } = req.body.params;
+  picture = transformUrl(picture) || picture
   if (!username) {
     username = nickname
   }
