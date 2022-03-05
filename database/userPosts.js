@@ -38,7 +38,7 @@ const getPosts = async (req, res) => {
 const postPost = async (req, res) => {
   let { published, tracks, userId, timePosted, username, postLikes, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
   if ( projectImageLink === null || projectImageLink === undefined ) {
-    projectImageLink = 'https://i.pinimg.com/236x/1b/32/3e/1b323e0b909bdfa943208f3aad2ba8bb--designers.jpg';
+    projectImageLink = 'https://res.cloudinary.com/xoxohorses/image/upload/v1646452887/default_j1zdrg.jpg';
   }
   projectImageLink = transformUrl(projectImageLink) || projectImageLink;
 
