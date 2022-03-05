@@ -37,7 +37,10 @@ const getPosts = async (req, res) => {
 
 const postPost = async (req, res) => {
   let { published, tracks, userId, timePosted, username, postLikes, postText, tags, projectAudioLink, projectTitle, projectImageLink, projectLength } = req.body;
-  projectImageLink = transformUrl(projectImageLink) || projectImageLink
+  if ( projectImageLink === null || projectImageLink === undefined ) {
+    projectImageLink = 'https://i.pinimg.com/236x/1b/32/3e/1b323e0b909bdfa943208f3aad2ba8bb--designers.jpg';
+  }
+  projectImageLink = transformUrl(projectImageLink) || projectImageLink;
 
   const query1 = "INSERT INTO posts (published, timePosted, postLikes, postText, projectAudioLink, projectTitle, projectImageLink, projectLength, user_id, tracks) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, (SELECT id FROM user_accounts WHERE username = $9), $10 ) RETURNING *"
   const query2 = "INSERT INTO hashtags (hashtagArr, post_id) VALUES ($1, (SELECT max(id) FROM posts) ) RETURNING *"
